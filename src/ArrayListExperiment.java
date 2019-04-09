@@ -1,3 +1,4 @@
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,7 +8,7 @@ import java.util.ListIterator;
  * Simple explorations of iterators and list iterators, using Java's friendly ArrayList class.
  * 
  * @author Samuel A. Rebelsky
- * @author Your Name Here
+ * @author Giang Khuat
  */
 public class ArrayListExperiment {
   // +---------+---------------------------------------------------------
