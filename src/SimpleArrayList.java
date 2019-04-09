@@ -71,8 +71,8 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     return listIterator();
   } // iterator()
 
-  public ListIterator<T> listIterator() {
-    return new ListIterator<T>() {
+  public ListIterator<T> listIterator()  {
+    return new ListIterator<T>()  {
       // +--------+--------------------------------------------------------
       // | Fields |
       // +--------+
@@ -81,7 +81,8 @@ public class SimpleArrayList<T> implements SimpleList<T> {
        * The position in the list of the next value to be returned.
        */
       int pos = 0;
-
+      // back is begind pos
+      int back = pos -1 ;
       // +---------+-------------------------------------------------------
       // | Helpers |
       // +---------+
@@ -117,20 +118,27 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         // or prevIndex is increased by 1. Amazingly, one little operation
         // accomplishes all of those goals.
         ++this.pos;
+        // update back
+        ++this.back;
       } // add(T)
 
+      // since pos can't go off indices (after last element)
+      // based on this implementation
+      // so back can only be at element before last
+      // and pos can only be pointing at last element when we finish iterating
       public boolean hasNext() {
         return (this.pos < SimpleArrayList.this.size);
       } // hasNext()
 
       public boolean hasPrevious() {
-        return (this.pos > 0);
+    	  return (this.back >= 0);
       } // hasPrevious()
 
       public T next() {
          if (!this.hasNext()) {
           throw new NoSuchElementException();
          } //
+         this.back++;
         return SimpleArrayList.this.values[this.pos++];
       } // next()
 
@@ -139,14 +147,18 @@ public class SimpleArrayList<T> implements SimpleList<T> {
       } // nextIndex()
 
       public int previousIndex() {
-        return this.pos - 1;
+        return this.back;
       } // prevIndex
 
+      // do we have to decrement back when previous is called ?
       public T previous() throws NoSuchElementException {
         if (!this.hasPrevious())
           throw new NoSuchElementException();
-        // STUB
-        return null;
+        T tmp = SimpleArrayList.this.values[back];
+        // moving backwards Together !!!
+        this.back--;
+        this.pos--;
+        return tmp;
       } // previous()
 
       public void remove() {
@@ -156,8 +168,12 @@ public class SimpleArrayList<T> implements SimpleList<T> {
       } // remove()
 
       public void set(T val) {
-        // STUB
-        throw new UnsupportedOperationException();
+    	 // if the condition to throw element is this.back < 0, since bakc can be
+    	  // negative, we would nt be able to set the first element
+//        if (this.pos == 0) {
+//        	throw new Exception ("No previous exception to set");
+//        }
+        SimpleArrayList.this.values[this.pos] = val;
       } // set(T)
     };
   } // listIterator()
