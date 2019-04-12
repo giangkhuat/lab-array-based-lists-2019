@@ -81,6 +81,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
        * The position in the list of the next value to be returned.
        */
       int pos = 0;
+       
       // back is begind pos
       int back = pos -1 ;
       // +---------+-------------------------------------------------------
@@ -130,10 +131,13 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         return (this.pos < SimpleArrayList.this.size);
       } // hasNext()
 
+      // back = -1, pos  = 0, first element -> no previous
+      // back = 0, pos = 1, because the first elements doesnt have previous
       public boolean hasPrevious() {
-    	  return (this.back >= 0);
+    	  return (this.back > 0);
       } // hasPrevious()
 
+      // back is following pos to keep track of previous element
       public T next() {
          if (!this.hasNext()) {
           throw new NoSuchElementException();
@@ -167,13 +171,14 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         throw new UnsupportedOperationException();
       } // remove()
 
+      // set replace the element next() just returned
       public void set(T val) {
     	 // if the condition to throw element is this.back < 0, since bakc can be
     	  // negative, we would nt be able to set the first element
 //        if (this.pos == 0) {
 //        	throw new Exception ("No previous exception to set");
 //        }
-        SimpleArrayList.this.values[this.pos] = val;
+        SimpleArrayList.this.values[this.back] = val;
       } // set(T)
     };
   } // listIterator()
