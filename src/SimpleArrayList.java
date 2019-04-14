@@ -134,7 +134,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
       // back = -1, pos  = 0, first element -> no previous
       // back = 0, pos = 1, because the first elements doesnt have previous
       public boolean hasPrevious() {
-    	  return (this.back > 0);
+    	  return (this.back >= 0);
       } // hasPrevious()
 
       // back is following pos to keep track of previous element
@@ -178,7 +178,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 //        if (this.pos == 0) {
 //        	throw new Exception ("No previous exception to set");
 //        }
-        SimpleArrayList.this.values[this.pos] = val;
+        SimpleArrayList.this.values[this.back] = val;
       } // set(T)
     };
   } // listIterator()

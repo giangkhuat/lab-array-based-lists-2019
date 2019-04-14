@@ -1,6 +1,6 @@
 
-import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.ArrayList;
 
 public class JavaArayList {
     public static void main(String[] args) {
@@ -21,5 +21,12 @@ public class JavaArayList {
       System.out.println("Previous: " + listIterator.previousIndex());
       System.out.println("Next: " + listIterator.nextIndex());
       System.out.println("previous element is " + listIterator.hasPrevious());
+      listIterator.set("Hello");
+      System.out.println(aList.indexOf("Hello"));
+      System.out.println("____________");
+      System.out.println(listIterator.previousIndex());
+      System.out.println(listIterator.previous());
+      System.out.println(listIterator.nextIndex());
+      System.out.println(listIterator.previousIndex());
     }
 }

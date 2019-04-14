@@ -18,12 +18,7 @@ public class SALExpt {
     it.add("boba");
     
     ListIterator<String> it2 = (ListIterator<String>) fruits.iterator();
-    pen.println("hello");
-    while (it2.hasNext()) {
-    	if (it2.next().equals("papaya")) {
-    		it2.set("kungfu");
-    	}
-    }
+    System.out.println(it2.next());
     
     ListIterator<String> it3 = (ListIterator<String>) fruits.iterator();
     while (it3.hasNext()) {
