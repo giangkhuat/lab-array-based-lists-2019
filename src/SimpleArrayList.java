@@ -81,12 +81,10 @@ public class SimpleArrayList<T> implements SimpleList<T> {
        * The position in the list of the next value to be returned.
        */
       int pos = 0;
-       
-      // back is begind pos
-      int back = pos -1 ;
-      // +---------+-------------------------------------------------------
-      // | Helpers |
-      // +---------+
+      /*
+       * update is the position of the previous or next element
+       */
+      int update;
 
       // +---------+-------------------------------------------------------
       // | Methods |
@@ -119,8 +117,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         // or prevIndex is increased by 1. Amazingly, one little operation
         // accomplishes all of those goals.
         ++this.pos;
-        // update back
-        ++this.back;
+        update = -1;
       } // add(T)
 
       // since pos can't go off indices (after last element)
@@ -134,7 +131,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
       // back = -1, pos  = 0, first element -> no previous
       // back = 0, pos = 1, because the first elements doesnt have previous
       public boolean hasPrevious() {
-    	  return (this.back >= 0);
+    	  return (this.pos > 0);
       } // hasPrevious()
 
       // back is following pos to keep track of previous element
@@ -142,7 +139,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
          if (!this.hasNext()) {
           throw new NoSuchElementException();
          } //
-         this.back++;
+         this.update = this.pos;
         return SimpleArrayList.this.values[this.pos++];
       } // next()
 
@@ -151,34 +148,50 @@ public class SimpleArrayList<T> implements SimpleList<T> {
       } // nextIndex()
 
       public int previousIndex() {
-        return this.back;
+        return this.pos - 1;
       } // prevIndex
 
       // do we have to decrement back when previous is called ?
       public T previous() throws NoSuchElementException {
         if (!this.hasPrevious())
           throw new NoSuchElementException();
-        T tmp = SimpleArrayList.this.values[back];
-        // moving backwards Together !!!
-        this.back--;
+        T tmp = SimpleArrayList.this.values[this.pos - 1];
         this.pos--;
+        // update pointer points to previous element
+        update = pos;
         return tmp;
       } // previous()
 
       public void remove() {
-        // Do the real work.
-        // STUB
-        throw new UnsupportedOperationException();
+        if (update != -1) { 
+          // shift all elements from update + 1 to size -1 one position left 
+          //{ ....}
+          for (int i = update + 1;i <= SimpleArrayList.this.size - 1; i++) {
+            SimpleArrayList.this.values[i - 1] = SimpleArrayList.this.values[i];
+          }
+          SimpleArrayList.this.size--;
+          this.pos --;
+        } else 
+          throw new IllegalStateException("No such element");
       } // remove()
 
       // set replace the element next() just returned
       public void set(T val) {
+<<<<<<< HEAD
     	 // if the condition to throw element is this.back < 0, since bakc can be
     	  // negative, we would nt be able to set the first element
 //        if (this.pos == 0) {
 //        	throw new Exception ("No previous exception to set");
 //        }
         SimpleArrayList.this.values[this.pos] = val;
+=======
+    	if (update != -1) {
+          SimpleArrayList.this.values[this.update] = val;
+          update = -1;
+    	} else 
+    	  throw new IllegalStateException("No such element");
+
+>>>>>>> 2f190e2ed4b430b9cb37cb5a3fafb75a8b03a169
       } // set(T)
     };
   } // listIterator()
