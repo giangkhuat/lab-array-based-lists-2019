@@ -29,7 +29,7 @@ public class SALExpt {
     */
    
     ListIterator<String> it2 = (ListIterator<String>) fruits.iterator();
-<<<<<<< HEAD
+
     pen.println("_________");
     while (it2.hasNext()) {
       String tmp = it2.next();
@@ -39,10 +39,8 @@ public class SALExpt {
     	}
     }
     pen.println("_________");
-=======
+
     System.out.println(it2.next());
-    
->>>>>>> 4d818ba581ed115db7e1fb627721fe2098836bcf
     ListIterator<String> it3 = (ListIterator<String>) fruits.iterator();
     while (it3.hasNext()) {
     	pen.println(it3.next());
