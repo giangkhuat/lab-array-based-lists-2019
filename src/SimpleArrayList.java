@@ -178,7 +178,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 //        if (this.pos == 0) {
 //        	throw new Exception ("No previous exception to set");
 //        }
-        SimpleArrayList.this.values[this.back] = val;
+        SimpleArrayList.this.values[this.pos] = val;
       } // set(T)
     };
   } // listIterator()
