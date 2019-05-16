@@ -1,8 +1,9 @@
-
 import java.io.PrintWriter;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ListIterator;
+
 
 /**
  * Simple explorations of iterators and list iterators, using Java's friendly ArrayList class.

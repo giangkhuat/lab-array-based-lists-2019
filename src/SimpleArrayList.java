@@ -131,7 +131,11 @@ public class SimpleArrayList<T> implements SimpleList<T> {
       // back = -1, pos  = 0, first element -> no previous
       // back = 0, pos = 1, because the first elements doesnt have previous
       public boolean hasPrevious() {
+<<<<<<< HEAD
     	  return (this.pos > 0);
+=======
+    	  return (this.back >= 0);
+>>>>>>> 4d818ba581ed115db7e1fb627721fe2098836bcf
       } // hasPrevious()
 
       // back is following pos to keep track of previous element
